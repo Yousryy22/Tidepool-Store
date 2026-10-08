@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tidepool Supply (preview)</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/theme.css">
+<script>window.TIDEPOOL={domain:'',token:'',limit:20};</script>
+</head><body class="template-index">
+<!-- Static stand-in for what layout/theme.liquid + sections render on Shopify. -->
+<div class="bar">Free shipping on orders over $50. Packed by hand on Fridays.</div>
+<header class="site-header"><div class="wrap">
+  <a class="logo" href="#"><i></i>Tidepool Supply</a>
+  <button class="burger" data-menu-toggle aria-expanded="false">Menu</button>
+  <nav class="nav" data-nav><a href="#shop">Shop</a><a href="#story">Our story</a></nav>
+  <button class="bag-btn" data-open-bag>Bag <span class="count" data-bag-count hidden>0</span></button>
+</div></header>
+<main>
+<section class="hero"><div class="wrap">
+  <div>
+    <h1>Stuff for people who actually use their stuff. <span>Built to get used.</span></h1>
+    <p class="lede">Clothes, gadgets and small luxuries that earn their spot in your bag.</p>
+    <div class="cta"><a class="btn" href="#shop">Browse the shelf</a><a class="btn alt" href="#shop">See everything</a></div>
+  </div>
+  <div class="stack" data-hero-stack><div class="sticker">Free ship over $50</div></div>
+</div></section>
+<div class="strip" aria-hidden="true"><div id="strip"></div></div>
+<section class="section" id="shop"><div class="wrap">
+  <div class="section-head"><h2>The shelf</h2><p>Live from our product feed. Tap a photo for a closer look.</p></div>
+  <div id="react-shop" data-limit="20"></div>
+</div></section>
+<section class="story" id="story"><div class="wrap">
+  <div><h2>Two people, one garage, too many boxes</h2>
+  <p>We started Tidepool because we kept buying things that fell apart by spring. So we test everything first, and if we would not keep it, it does not go on the shelf.</p>
+  <p>Orders go out Monday to Friday. If something is wrong, email us and we fix it.</p></div>
+  <div class="note">Most returned item last year: nothing. Okay, one scarf.</div>
+</div></section>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <div><a class="logo" href="#"><i></i>Tidepool Supply</a><p>Useful things, honestly priced. Questions? A real person answers.</p></div>
+  <div><h4>Shop</h4><ul><li><a href="#shop">Everything</a></li></ul></div>
+  <div><h4>Help</h4><ul><li><a href="#">Shipping</a></li><li><a href="#">Returns</a></li></ul></div>
+  <p class="legal">&copy; 2026 Tidepool Supply. Made in a small garage.</p>
+</div></footer>
+<script>
+document.getElementById('strip').innerHTML=[1,2].map(()=>'Packed by hand,30 day returns,Fair prices,Real humans on email'.split(',').map(w=>`<span>${w}</span><span>*</span>`).join('')).join('');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="../assets/api.js"></script>
+<script src="../assets/theme.js"></script>
+<script src="../assets/shop-react.js"></script>
+</body></html>
