@@ -1,0 +1,24 @@
+<div class="page wrap">
+  <div class="section-head"><h1>Your bag</h1></div>
+  {% if cart.item_count == 0 %}
+    <div class="state"><p>Your bag is empty. That's fixable.</p><a class="btn" href="{{ routes.all_products_collection_url }}">Go shopping</a></div>
+  {% else %}
+    <form action="{{ routes.cart_url }}" method="post">
+      <table class="cart-table">
+        <thead><tr><th colspan="2">Item</th><th>Qty</th><th>Total</th></tr></thead>
+        {% for item in cart.items %}
+          <tr>
+            <td><img src="{{ item.image | image_url: width: 160 }}" alt=""></td>
+            <td><a href="{{ item.url }}">{{ item.product.title }}</a>{% unless item.product.has_only_default_variant %}<br><small>{{ item.variant.title }}</small>{% endunless %}<br><small>{{ item.final_price | money }}</small></td>
+            <td><span class="step"><button type="button" data-qty-step="-1">&minus;</button><input type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity"><button type="button" data-qty-step="1">+</button></span></td>
+            <td>{{ item.final_line_price | money }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+      <div class="pcard-row" style="margin-top:30px">
+        <p>{% assign left = 5000 | minus: cart.total_price %}{% if left > 0 %}Add {{ left | money }} more for free shipping.{% else %}Shipping is on us.{% endif %}</p>
+        <div><span class="price big">{{ cart.total_price | money }}</span> <button class="btn" name="checkout" type="submit">Check out</button></div>
+      </div>
+    </form>
+  {% endif %}
+</div>

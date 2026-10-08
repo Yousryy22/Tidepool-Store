@@ -1,0 +1,23 @@
+<div class="bar">{{ section.settings.announcement }}</div>
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="{{ routes.root_url }}"><i></i>{{ shop.name }}</a>
+    <button class="burger" data-menu-toggle aria-expanded="false" aria-label="Menu">Menu</button>
+    <nav class="nav" data-nav aria-label="Main">
+      {% for link in linklists.main-menu.links %}
+        <a href="{{ link.url }}" {% if link.active %}aria-current="page"{% endif %}>{{ link.title }}</a>
+      {% else %}
+        <a href="{{ routes.root_url }}#shop">Shop</a>
+        <a href="{{ routes.all_products_collection_url }}">Everything</a>
+      {% endfor %}
+    </nav>
+    {%- if template.name == 'index' -%}
+      <button class="bag-btn" data-open-bag>{{ 'general.cart' | t }} <span class="count" data-bag-count hidden>0</span></button>
+    {%- else -%}
+      <a class="bag-btn" href="{{ routes.cart_url }}">{{ 'general.cart' | t }} <span class="count" data-bag-count {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</span></a>
+    {%- endif -%}
+  </div>
+</header>
+{% schema %}
+{ "name": "Header", "settings": [ { "type": "text", "id": "announcement", "label": "Announcement", "default": "Free shipping on orders over $50. Packed by hand on Fridays." } ] }
+{% endschema %}

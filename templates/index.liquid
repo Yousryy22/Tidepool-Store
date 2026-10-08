@@ -1,0 +1,15 @@
+{% section 'hero' %}
+<section class="section" id="shop">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>The shelf</h2>
+      <p>Live from our product feed. Tap a photo for a closer look.</p>
+    </div>
+    {%- comment -%} React takes over this node. The noscript block is real Liquid output for crawlers. {%- endcomment -%}
+    <div id="react-shop" data-limit="{{ settings.shop_limit | default: 20 }}"></div>
+    <noscript>
+      <div class="grid">{% for product in collections.all.products limit: 12 %}{% render 'product-card', product: product %}{% endfor %}</div>
+    </noscript>
+  </div>
+</section>
+{% section 'story' %}

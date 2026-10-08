@@ -1,0 +1,29 @@
+{%- assign current = product.selected_or_first_available_variant -%}
+<div class="page wrap">
+  <div class="pdp">
+    <div class="pdp-img">
+      {% if product.featured_image %}<img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.featured_image.alt | escape }}" width="600">{% endif %}
+    </div>
+    <div>
+      <p class="pcard-cat">{{ product.type }}</p>
+      <h1>{{ product.title }}</h1>
+      <span class="price" data-price>{{ current.price | money }}</span>
+      <div class="rte">{{ product.description }}</div>
+      {% form 'product', product, data-ajax-cart: 'true' %}
+        {% unless product.has_only_default_variant %}
+          <label for="variant">{{ product.options.first }}</label>
+          <select id="variant" name="id">
+            {% for v in product.variants %}<option value="{{ v.id }}" {% if v == current %}selected{% endif %} {% unless v.available %}disabled{% endunless %}>{{ v.title }}, {{ v.price | money }}</option>{% endfor %}
+          </select>
+        {% else %}<input type="hidden" name="id" value="{{ current.id }}">{% endunless %}
+        <button class="btn" type="submit" {% unless current.available %}disabled{% endunless %}>{% if current.available %}Add to bag{% else %}Sold out{% endif %}</button>
+      {% endform %}
+    </div>
+  </div>
+  {% assign more = collection.products | default: collections.all.products %}
+  <div class="section-head" style="margin-top:70px"><h2>You might also like</h2></div>
+  <div class="coll-grid">
+    {% assign shown = 0 %}
+    {% for p in more %}{% if p.id != product.id and shown < 4 %}{% render 'product-card', product: p %}{% assign shown = shown | plus: 1 %}{% endif %}{% endfor %}
+  </div>
+</div>

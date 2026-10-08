@@ -1,0 +1,20 @@
+<section class="story">
+  <div class="wrap">
+    <div>
+      <h2>{{ section.settings.title }}</h2>
+      {{ section.settings.body }}
+    </div>
+    <div class="note">{{ section.settings.note }}</div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Story",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Two people, one garage, too many boxes" },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>We started Tidepool because we kept buying things that fell apart by spring. So we test everything first, and if we would not keep it, it does not go on the shelf.</p><p>Orders go out Monday to Friday. If something is wrong, email us and we fix it.</p>" },
+    { "type": "textarea", "id": "note", "label": "Sticky note", "default": "Most returned item last year: nothing. Okay, one scarf." }
+  ],
+  "presets": [{ "name": "Story" }]
+}
+{% endschema %}

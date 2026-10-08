@@ -1,0 +1,19 @@
+<div class="page wrap">
+  <div class="section-head"><h1>{{ collection.title }}</h1><p>{{ collection.description | strip_html | truncate: 160 }}</p></div>
+  {% paginate collection.products by 12 %}
+    {% if collection.products.size == 0 %}
+      <div class="state"><p>Nothing here yet.</p><a class="btn" href="{{ routes.all_products_collection_url }}">See everything</a></div>
+    {% else %}
+      <div class="coll-grid">{% for product in collection.products %}{% render 'product-card', product: product %}{% endfor %}</div>
+    {% endif %}
+    {% if paginate.pages > 1 %}
+      <nav class="pager" aria-label="Pages">
+        {% for part in paginate.parts %}
+          {% if part.is_link %}<a href="{{ part.url }}">{{ part.title }}</a>
+          {% elsif part.title == paginate.current_page %}<span class="current" aria-current="page">{{ part.title }}</span>
+          {% else %}<span>{{ part.title }}</span>{% endif %}
+        {% endfor %}
+      </nav>
+    {% endif %}
+  {% endpaginate %}
+</div>

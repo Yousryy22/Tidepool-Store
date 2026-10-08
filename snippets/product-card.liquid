@@ -1,0 +1,19 @@
+{%- comment -%} Server-rendered card. Usage: {% render 'product-card', product: product %} {%- endcomment -%}
+<article class="pcard">
+  <a class="pcard-img" href="{{ product.url }}" style="display:block">
+    {% if product.featured_image %}
+      <img src="{{ product.featured_image | image_url: width: 500 }}" alt="{{ product.featured_image.alt | escape }}" loading="lazy" width="250" height="250">
+    {% endif %}
+  </a>
+  <div class="pcard-body">
+    <p class="pcard-cat">{{ product.type | default: product.vendor }}</p>
+    <h3><a href="{{ product.url }}" style="text-decoration:none">{{ product.title }}</a></h3>
+    <div class="pcard-row">
+      <span class="price">
+        {{ product.price | money }}
+        {% if product.compare_at_price > product.price %}<s style="font-size:.8em;opacity:.6">{{ product.compare_at_price | money }}</s>{% endif %}
+      </span>
+      {% unless product.available %}<span class="pcard-cat">Sold out</span>{% endunless %}
+    </div>
+  </div>
+</article>

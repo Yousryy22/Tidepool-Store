@@ -1,0 +1,37 @@
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <h1>{{ section.settings.heading }} <span>{{ section.settings.highlight }}</span></h1>
+      <p class="lede">{{ section.settings.text }}</p>
+      <div class="cta">
+        <a class="btn" href="#shop">Browse the shelf</a>
+        <a class="btn alt" href="{{ routes.all_products_collection_url }}">See everything</a>
+      </div>
+    </div>
+    <div class="stack" data-hero-stack aria-label="A few things from the shop">
+      {%- comment -%} Filled in by theme.js. Liquid fallback below shows if JS or the API is down. {%- endcomment -%}
+      {% for p in collections.all.products limit: 3 %}
+        <a class="stack-card" href="{{ p.url }}" style="--r:{{ forloop.index0 | times: 4 | minus: 5 }}deg;--i:{{ forloop.index0 }}">
+          <img src="{{ p.featured_image | image_url: width: 300 }}" alt="{{ p.title | escape }}"><span>{{ p.title }}</span><b>{{ p.price | money }}</b>
+        </a>
+      {% endfor %}
+      <div class="sticker">Free ship over $50</div>
+    </div>
+  </div>
+</section>
+<div class="strip" aria-hidden="true"><div>
+  {% assign words = section.settings.strip | split: ',' %}
+  {% for i in (1..2) %}{% for w in words %}<span>{{ w | strip }}</span><span>*</span>{% endfor %}{% endfor %}
+</div></div>
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Stuff for people who actually use their stuff." },
+    { "type": "text", "id": "highlight", "label": "Highlighted phrase", "default": "Built to get used." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Clothes, gadgets and small luxuries that earn their spot in your bag." },
+    { "type": "text", "id": "strip", "label": "Scrolling strip (comma separated)", "default": "Packed by hand, 30 day returns, Fair prices, Real humans on email" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}
