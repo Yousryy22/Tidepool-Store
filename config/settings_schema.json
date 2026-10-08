@@ -1,0 +1,10 @@
+[
+  { "name": "theme_info", "theme_name": "Tidepool", "theme_version": "1.0.0", "theme_author": "Tidepool Supply", "theme_documentation_url": "https://shopify.dev/docs/themes", "theme_support_url": "https://help.shopify.com" },
+  { "name": "Storefront API",
+    "settings": [
+      { "type": "paragraph", "content": "Leave empty to use the fake products API." },
+      { "type": "text", "id": "sf_token", "label": "Storefront access token" },
+      { "type": "number", "id": "shop_limit", "label": "Products in React shop", "default": 20 }
+    ]
+  }
+]
